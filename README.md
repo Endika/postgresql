@@ -1,3 +1,3 @@
-# MongoDB
-    docker run -d -p 27017:27017 --name mongodb endika/mongodb 
+# Postgresql
+    docker run -p 5432:5432 endika/postgresql 
 
