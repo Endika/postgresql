@@ -11,9 +11,13 @@ VOLUME ["/var/log/postgresql", \
         "/etc/postgresql/9.3/main", \
         "/var/lib/postgresql/9.3/main"]
 
+RUN locale-gen en_US en_US.UTF-8 es_ES es_ES.UTF-8 && \
+	dpkg-reconfigure locales
+	pg_createcluster 9.3 main \
+	/etc/init.d/postgresql start
 
 USER postgres
-RUN echo "CREATE USER odoo WITH PASSWORD $ODOO_PASS;" | psql
-RUN echo "ALTER USER odoo WITH SUPERUSER;" | psql
+RUN psql -c "CREATE USER odoo WITH PASSWORD $ODOO_PASS;"
+RUN psql -c "ALTER USER odoo WITH SUPERUSER;"
 CMD ["postgres"]
 EXPOSE 5432
