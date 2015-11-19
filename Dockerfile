@@ -13,8 +13,8 @@ VOLUME ["/var/log/postgresql", \
 
 RUN locale-gen en_US en_US.UTF-8 es_ES es_ES.UTF-8 && \
 	dpkg-reconfigure locales && \
-	pg_createcluster 9.3 main && \
-	/etc/init.d/postgresql start
+#	pg_createcluster 9.3 main && \
+	/etc/init.d/postgresql restart
 
 USER postgres
 RUN psql -c "CREATE USER odoo WITH PASSWORD $ODOO_PASS;"
